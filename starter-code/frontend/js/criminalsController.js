@@ -5,9 +5,10 @@ angular.module("InfamousCriminalsApp", [])
 
   function CriminalsController($http) {
     var self = this
-    this.newCriminal = {};
-    this.addCriminal = addCriminal;
-    this.getCriminals = getCriminals;
+    self.newCriminal = {};
+    self.addCriminal = addCriminal;
+    self.getCriminals = getCriminals;
+    self.deleteCriminal = deleteCriminal;
     self.all = [];
 
     function addCriminal() {
@@ -19,11 +20,20 @@ angular.module("InfamousCriminalsApp", [])
         self.newCriminal = {};
     }
 
-    function deleteCriminal() {
-      $http.delete("http://localhost:3000/criminals")
-        .then(function(data) {
-          self.destroy;
-        })
+    function deleteCriminal(criminal) {
+      $http.delete("http://localhost:3000/criminals/"+criminal._id)
+      .then(function(res) {
+        var index = self.all.indexOf(criminal);
+        self.all.splice(index, 1);
+      })
+    }
+
+    function updateCriminal(criminal) {
+      $http.update("http://localhost:3000/criminals/"+criminal._id)
+        .then(function(res){
+        // add things to update //
+        // will need to add a button //  
+      })
     }
 
     function getCriminals() {
