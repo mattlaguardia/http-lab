@@ -1,1 +1,1 @@
-angular.module("InfamousCriminalsApp", []);
+angular.module("InfamousCriminalsApp", ['ngResource']);
